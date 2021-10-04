@@ -1,3 +1,20 @@
+<?php
+include 'phpScripts/db_connection.php';
+$conn = OpenCon();
+$sql = "SELECT employee_info.firstname, employee_info.lastname, employee_info.employeeNumber, designations.jobTitle, designations.basicSalary
+FROM employee_info INNER JOIN designations ON  employee_info.jobCode = designations.jobCode";
+$result = $conn->query($sql);
+//Store the results in an array
+$arr = array();
+while ($row = mysqli_fetch_assoc($result)) {
+   $arr[] = $row;
+}
+//CLose DB Connection
+CloseCon($conn);
+//Session the Employees array
+$_SESSION["employees"] = $arr;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -271,34 +288,22 @@
             </thead>
             <tbody>
 
+              <?php
+                                $arr = $_SESSION["employees"];
+                                 foreach ($arr as $row){
+              ?>
+
             <tr>
-              <td>JAM1234</td>
-              <td>James Leeroy Mazivise</td>
-              <td>Orange Picker </td>
-              <td>R350 </td>
-              <td> <button type="button" onclick="window.location.href='#'"  class="btn btn-block btn-danger btn-sm">Deactive Employee</button></td>
+              <td> <?php echo $row['employeeNumber']; ?> </td>
+              <td> <?php echo $row['firstname'].' '.$row['lastname'] ; ?> </td>
+              <td> <?php echo $row['jobTitle']; ?> </td>
+              <td> R<?php  echo $row['basicSalary']; ?> </td>
+                <td> <button type="button" onclick="window.location.href='phpScripts/deactiveEmployment.php?id=<?php echo $row['employeeNumber']; ?>&title=<?php echo $row['jobTitle']; ?>'"  class="btn btn-block btn-danger btn-sm">Deactive Employee</button></td>
             </tr>
-            <tr>
-                <td>CHO2156</td>
-                <td>John Toyota</td>
-                <td>Orange Picker </td>
-                <td>R350 </td>
-                <td> <button type="button" onclick="window.location.href=''"  class="btn btn-block btn-danger btn-sm">Deactive Employee</button></td>
-              </tr>
-              <tr>
-                  <td>CHO2156</td>
-                  <td>Peter Hundai</td>
-                  <td>Orange Picker </td>
-                  <td>R350 </td>
-                  <td> <button type="button" onclick="window.location.href=''"  class="btn btn-block btn-danger btn-sm">Deactive Employee</button></td>
-                </tr>
-                <tr>
-                    <td>CHO2156</td>
-                    <td>Luke Choppa</td>
-                    <td>Orange Picker </td>
-                    <td>R350 </td>
-                    <td> <button type="button" onclick="window.location.href=''"  class="btn btn-block btn-danger btn-sm"></button></td>
-                  </tr>
+            <?php
+                 };
+             ?>
+
 
             </tbody>
 

@@ -8,10 +8,20 @@
  while ($row = mysqli_fetch_assoc($result)) {
    $arr[] = $row;
  }
+
+ $sql = "SELECT * FROM country ";
+ $result = $conn->query($sql);
+//Store the results in an array
+ $country1 = array();
+ while ($row = mysqli_fetch_assoc($result)) {
+   $country1[] = $row;
+ }
+
  //CLose DB Connection
  CloseCon($conn);
  //Session the designations array
  $_SESSION["designations"] = $arr;
+ $_SESSION["country"] = $country1;
 ?>
 
 <!DOCTYPE html>
@@ -301,13 +311,14 @@
                  <div class="form-group">
                    <label for="exampleSelectRounded0">Select Citizenship</label>
                    <select required class="form-control select2bs4" id="FCitizenship" name="FCitizenship" style="width: 100%;">
-                     <option selected="selected">Alabama</option>
-                     <option>Alaska</option>
-                     <option>California</option>
-                     <option>Delaware</option>
-                     <option>Tennessee</option>
-                     <option>Texas</option>
-                     <option>Washington</option>
+                     <?php
+                                       $arr = $_SESSION["country"];
+                                        foreach ($arr as $row){
+                     ?>
+                     <option ><?php echo $row['FDescription']; ?></option>
+                     <?php
+                          };
+                     ?>
                    </select>
                    </div>
                    <div class="form-group">
