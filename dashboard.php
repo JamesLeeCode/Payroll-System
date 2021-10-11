@@ -12,6 +12,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 CloseCon($conn);
 //Session the Employees array
 $_SESSION["employees"] = $arr;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -278,15 +280,27 @@ $_SESSION["employees"] = $arr;
             <!-- small card -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>12</h3>
+                <h3>
+                  <?php
+                 $conn = OpenCon();
+
+                 $sql = "SELECT * FROM monthlyrecords WHERE loans != 0 ";
+                 if ($result=mysqli_query($conn,$sql)) {
+                     $loansTotal=mysqli_num_rows($result);
+                   //  echo "The total number of rows are: ".$rowcount;
+                   }
+                  echo $loansTotal
+                  ?>
+
+                </h3>
 
                 <p>Loans Taken By Employees</p>
               </div>
               <div class="icon">
                 <i class="fas fa-calendar-day"></i>
               </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
+              <a href="loans.php" class="small-box-footer">
+                Add A Loan <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
@@ -295,15 +309,23 @@ $_SESSION["employees"] = $arr;
             <!-- small card -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3> <?php
+                $conn = OpenCon();
+                $sql = "SELECT * FROM employee_info ";
+                if ($result=mysqli_query($conn,$sql)) {
+                    $employeesTotal=mysqli_num_rows($result);
+                  //  echo "The total number of rows are: ".$rowcount;
+                }
+                 echo $employeesTotal ?>
+               </h3>
 
                 <p>Currently Active Employees</p>
               </div>
               <div class="icon">
                 <i class="fas fa-user-plus"></i>
               </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
+              <a href="addNewEmployee.php" class="small-box-footer">
+                Add Employees <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
@@ -312,15 +334,36 @@ $_SESSION["employees"] = $arr;
             <!-- small card -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>R65 000</h3>
+                <h3>
+
+                  <?php
+                 $conn = OpenCon();
+                 $totalSalaries = 0;
+
+
+                 $sql = "SELECT designations.basicSalary
+                         FROM employee_info INNER JOIN designations
+                         ON  designations.jobCode = employee_info.jobCode ";
+
+                         $result = $conn->query($sql);
+
+                         while ($row = mysqli_fetch_assoc($result)) {
+                             $totalSalaries =  $totalSalaries + $row["basicSalary"];
+                         }
+                         //CLose DB Connection
+                         CloseCon($conn);
+                          echo "R".$totalSalaries;
+                  ?>
+
+                </h3>
 
                 <p>Estimated Salaries Cost</p>
               </div>
               <div class="icon">
                 <i class="fas fa-chart-pie"></i>
               </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
+              <a href="designation.php" class="small-box-footer">
+              Add Designations <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>

@@ -23,7 +23,7 @@
   $basicSalary = $_POST['basicSalary'];
   $payDate = $_POST['payDate'];
   $totalWage = $basicSalary + $bonus + $earning + $overTime - $loans - $deductions ;
-  $dateProcessed =  date("Y/m/d");
+  $dateProcessed =  date("F Y");
 
 
   // Enter Designations Into DB

@@ -370,10 +370,20 @@
                        <label for="lastname">Phone Number</label>
                        <input required type="tel" maxlength="10" class="form-control" required id="FNextofKin_CellNo" name="FNextofKin_CellNo" placeholder="Enter Phone Number">
                      </div>
+
                      <div class="form-group">
-                      <label for="exampleInputEmail1">Relationship</label>
-                      <input required type="text" class="form-control" id="FRelationship" name="FRelationship" required placeholder="Enter First Name">
-                     </div>
+                       <label for="exampleSelectRounded0">Select Employee Pay Day</label>
+                       <select id="FRelationship" name="FRelationship" required class="form-control" style="width: 100%;">
+                         <option> Father </option>
+                         <option> Mother </option>
+                         <option> Sister </option>
+                         <option> Brother </option>
+                         <option> Uncle </option>
+                         <option> Aunty </option>
+                         <option> Friend </option>
+                       </select>
+                       </div>
+
 
                 </div>
               </div>
@@ -387,7 +397,7 @@
                   <div class="card-body">
                     <div class="form-group">
                      <label for="exampleInputEmail1">Employee Number</label>
-                     <input type="text" required class="form-control" id="employeeNumber" name="employeeNumber" required placeholder="Employee Number">
+                     <input value="AUTO GENARATED" disabled type="text" required class="form-control" id="employeeNumber" name="employeeNumber" required placeholder="Employee Number">
                     </div>
                     <div class="form-group">
                       <label for="exampleSelectRounded0">Select The Designation Code</label>
@@ -449,6 +459,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
 
 <script>
   $(function () {

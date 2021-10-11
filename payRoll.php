@@ -1,10 +1,3 @@
-<?php
-
-
-
-
-
-?>
 
 
 <!DOCTYPE html>
@@ -294,7 +287,8 @@
                     monthlyrecords.overTime, monthlyrecords.saturdaysOverTime, monthlyrecords.holidayOverTime ,designations.jobTitle ,designations.basicSalary,
                    designations.normalOvertime, designations.saturdayOvertime AS saturdayOvertime1 , designations.holidayOvertime AS holidayOvertime1
                     FROM employee_info INNER JOIN monthlyrecords ON  employee_info.employeeNumber = monthlyrecords.employeeNumber
-                    INNER JOIN designations ON  designations.jobCode = employee_info.jobCode";
+                    INNER JOIN designations ON  designations.jobCode = employee_info.jobCode
+                    WHERE monthlyrecords.processed = 'false' ";
 
                     $result = $conn->query($sql);
                     //Store the results in an array
@@ -353,8 +347,11 @@
 
                 </tbody>
               </table>
-              <button style="margin-Bottom:10px; width: auto; margin-left:auto; margin-right:auto" type="submit" class="btn btn-success">Load Payroll</button>
+              <div row>
+              <button style="margin-Bottom:10px; width: auto; margin-left:auto; margin-right:auto"  onclick="window.location.href='payRoll.php'" class="btn btn-success">Reload Payroll</button>
+              <button style="margin-Bottom:10px; width: auto; margin-left:auto; margin-right:auto"  onclick=" window.open('paySlips.php','_blank')" class="btn btn-success">Print Pay-Slips</button>
 
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
