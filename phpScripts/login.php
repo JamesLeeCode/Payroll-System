@@ -15,9 +15,11 @@
 if(mysqli_num_rows( $result)==1)
 {
   header("Location:../dashboard.php");
+  exit();
 }
 else {
-  print_r( $query);
+  header("Location:../index.php?status=error");
+  exit();
 }
 
 

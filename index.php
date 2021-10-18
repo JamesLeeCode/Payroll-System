@@ -13,9 +13,21 @@
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+
+  <?php
+  if (isset($_GET['status'])) {
+   echo '<script type="text/javascript">toastr.error("Please check your login details and try again", "Incorrect Details Entered") </script>';
+    }
+   ?>
+
+
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
