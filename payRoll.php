@@ -27,6 +27,11 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  ///for the toast
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -257,10 +262,31 @@
     <section class="content">
       <div class="container-fluid">
 
+       <?php
+       if (isset($_GET['status'])) {
+        echo '<script type="text/javascript">toastr.error("Sorry you cannot print Payslips when there are still other Payslips to be processed.", "Finish Processing all Payslips!") </script>';
+        ?>
+
+
+
+      <?php
+         }
+
+         $groudGettingPaid = 0;
+         $today = date("d");
+         if($today <= 15)
+         {
+           $groudGettingPaid= 15;
+         }
+         else {
+           $groudGettingPaid= 25;
+         }
+      ?>
+
           <!-- /. Start of the Table for Employees -->
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Currently Active Employees</h3>
+              <h3 class="card-title">Employees getting paid on <?php echo $groudGettingPaid; ?>th</h3>
             </div>
             <!-- /.card-header -->
             <div id="tableRefresh" class="card-body">
@@ -280,15 +306,29 @@
                 <tbody>
 
                   <?php
+
+
                   include 'phpScripts/db_connection.php';
                   $conn = OpenCon();
+
+                  //checks which day isbeing process ...15 or 25
+                    $groudGettingPaid = 0;
+                    $today = date("d");
+                    if($today <= 15)
+                    {
+                      $groudGettingPaid= 15;
+                    }
+                    else {
+                      $groudGettingPaid= 25;
+                    }
 
                    $sql ="SELECT employee_info.jobCode, employee_info.firstname, employee_info.lastname, employee_info.employeeNumber,employee_info.payDate, monthlyrecords.loans, monthlyrecords.bonus,
                     monthlyrecords.overTime, monthlyrecords.saturdaysOverTime, monthlyrecords.holidayOverTime ,designations.jobTitle ,designations.basicSalary,
                    designations.normalOvertime, designations.saturdayOvertime AS saturdayOvertime1 , designations.holidayOvertime AS holidayOvertime1
                     FROM employee_info INNER JOIN monthlyrecords ON  employee_info.employeeNumber = monthlyrecords.employeeNumber
                     INNER JOIN designations ON  designations.jobCode = employee_info.jobCode
-                    WHERE monthlyrecords.processed = 'false' ";
+                    WHERE monthlyrecords.processed = 'false'
+                    AND employee_info.payDate = '$groudGettingPaid'";
 
                     $result = $conn->query($sql);
                     //Store the results in an array
@@ -337,7 +377,10 @@
                     </div>
                   </td>
 
-                <td>  <button onclick="this.form.submit(); this.disabled = true;" name="employment" id="employment" style="margin-Bottom:10px; width: 80%; margin-left:10%; margin-right:10%" type="submit" class="btn btn-success editbtn">Save</button></td>
+                <td>
+                 <button onclick="this.form.submit(); this.disabled = true;" name="employment" id="employment" style="margin-Bottom:10px; width: 80%; margin-left:10%; margin-right:10%" type="submit" class="btn btn-success editbtn">Save</button>
+
+                </td>
               </form>
                </tr>
 
@@ -349,7 +392,7 @@
               </table>
               <div row>
               <button style="margin-Bottom:10px; width: auto; margin-left:auto; margin-right:auto"  onclick="window.location.href='payRoll.php'" class="btn btn-success">Reload Payroll</button>
-              <button style="margin-Bottom:10px; width: auto; margin-left:auto; margin-right:auto"  onclick=" window.open('paySlips.php','_blank')" class="btn btn-success">Print Pay-Slips</button>
+              <button style="margin-Bottom:10px; width: auto; margin-left:auto; margin-right:auto"  onclick=" window.location.href='page_redirect.php'" class="btn btn-success">Print Pay-Slips</button>
 
               </div>
             </div>
@@ -378,7 +421,10 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+<!-- SweetAlert2 -->
+<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="plugins/toastr/toastr.min.js"></script>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

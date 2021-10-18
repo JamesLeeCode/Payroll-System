@@ -19,11 +19,26 @@
 </head>
 
 <?php
+
+
 include 'phpScripts/db_connection.php';
 $conn = OpenCon();
+$groudGettingPaid = 0;
+$today = date("d");
+if($today <= 15)
+{
+  $groudGettingPaid= 15;
+}
+else {
+  $groudGettingPaid= 25;
+}
+
+
+
+
 
 $monthProcess =   date("F Y");
-$sql = "SELECT * FROM salaries where dateProcessed = '$monthProcess'  ";
+$sql = "SELECT * FROM salaries where dateProcessed = '$monthProcess' AND payDate = '$groudGettingPaid'  ";
 $result = $conn->query($sql);
 //Store the results in an array
 $arr = array();
@@ -35,7 +50,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
                    foreach ($arr as $row){
                    $totalDeductions = $row['otherDeductions'] + $row['loan'] ;
-                  // method="POST" action="phpScripts/uploadPayroll.php"
+
 ?>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="container mt-5 mb-5">
