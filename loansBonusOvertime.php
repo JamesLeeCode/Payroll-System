@@ -193,7 +193,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="payRoll.php" class="nav-link">
+            <a href="phpScripts/rest_session.php" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Log-Out
