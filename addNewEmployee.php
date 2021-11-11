@@ -345,7 +345,7 @@
                       </div>
                       <div class="form-group">
                         <label for="lastname">Phone Number</label>
-                        <input required type="tel" maxlength="10" class="form-control" required id="FCellNo" name="FCellNo" placeholder="Enter Phone Number">
+                        <input required type="number" maxlength="10" class="form-control" required id="FCellNo" name="FCellNo" placeholder="Enter Phone Number">
                       </div>
                       <div class="form-group">
                         <label for="address">Address</label>
@@ -368,7 +368,7 @@
                      </div>
                      <div class="form-group">
                        <label for="lastname">Phone Number</label>
-                       <input required type="tel" maxlength="10" class="form-control" required id="FNextofKin_CellNo" name="FNextofKin_CellNo" placeholder="Enter Phone Number">
+                       <input required type="number" maxlength="10" class="form-control" required id="FNextofKin_CellNo" name="FNextofKin_CellNo" placeholder="Enter Phone Number">
                      </div>
 
                      <div class="form-group">

@@ -320,7 +320,7 @@ $_SESSION["employees"] = $arr;
                                <form  method="POST" action="phpScripts/updateEmployeeInfo.php">
                             <div class="form-group">
                               <label for="lastname">Phone Number</label>
-                              <input required type="tel" maxlength="10" class="form-control" required id="FCellNo" name="FCellNo" value="<?php echo $row['FCellNo']; ?>">
+                              <input required type="number" maxlength="10" class="form-control" required id="FCellNo" name="FCellNo" value="<?php echo $row['FCellNo']; ?>">
                             </div>
                             <div class="form-group">
                               <label for="address">Address</label>
@@ -368,7 +368,7 @@ $_SESSION["employees"] = $arr;
                     </div>
                     <div class="form-group">
                       <label for="lastname">Phone Number</label>
-                      <input required type="tel" maxlength="10" class="form-control" required id="FNextofKin_CellNo" name="FNextofKin_CellNo" value="<?php echo $row['FNextofKin_CellNo']; ?>">
+                      <input required type="number" maxlength="10" class="form-control" required id="FNextofKin_CellNo" name="FNextofKin_CellNo" value="<?php echo $row['FNextofKin_CellNo']; ?>">
                     </div>
                     <div class="form-group">
                      <label for="exampleInputEmail1">Relationship</label>

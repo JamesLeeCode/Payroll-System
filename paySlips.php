@@ -72,7 +72,25 @@ while ($row = mysqli_fetch_assoc($result)) {
       <div class="row">
           <div class="col-md-12">
               <div class="text-center lh-1 mb-2">
-                  <h3 class="fw-bold">Payslip</h3> <span class="fw-normal">Payment slip for the month of June 2021</span>
+                <?php
+                 if ($groudGettingPaid == 15) {
+
+                ?>
+                     <h3 class="fw-bold">Payslip</h3> <span class="fw-normal">Payment slip is from: 16 <?php echo date('M Y', strtotime("last day of -1 month")); ?> till 15 <?php echo date('M Y'); ?> </span>
+                     <?php
+                   }
+                   else{
+                     ?>
+                      <h3 class="fw-bold">Payslip</h3> <span class="fw-normal">Payment slip is from: 1 <?php echo date('M Y', strtotime("last day of -1 month")); ?> till <?php echo date("t"); ?>  <?php echo date('M Y'); ?> </span>
+
+                      <?php
+                    }
+
+                      ?>
+
+
+
+
               </div>
 
               <div class="row">
